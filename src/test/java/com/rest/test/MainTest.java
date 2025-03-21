@@ -74,24 +74,25 @@ public class MainTest {
     }
 
     // Positive Test Case 3: GET /books/{id}
-//    @Test
-//    public void testGetBookById() {
-//        int bookId = 1;
-//
-//        Response response = given()
-//                .auth().basic(ADMIN_USER, PASSWORD)
-//                .contentType("application/json")
-//                .when()
-//                .get(BASE_URL + "/" + bookId)
-//                .then()
-//                .statusCode(200)
-//                .extract().response();
-//
-//        response.then().body("id", equalTo(bookId))
-//                .body("name", equalTo("A Guide to the Bodhisattva Way of Life"))
-//                .body("author", equalTo("Santideva"))
-//                .body("price", equalTo(15.41f));
-//    }
+    @Test
+    public void testGetBookById() {
+        int bookId = 4;
+
+        Response response = given()
+                .auth().basic(NORMAL_USER, PASSWORD)
+                .contentType("application/json")
+                .when()
+                .get(BASE_URL + "/" + bookId)
+                .then()
+                .statusCode(200)
+                .extract().response();
+
+        response.then().body("id", equalTo(bookId))
+                .body("name", equalTo("A to the Bodhisattva Way of Life"))
+                .body("author", equalTo("Santideva"))
+                .body("price", equalTo(15.41f));
+        
+    }
 
     // Positive Test Case 4: PUT /books/{id}
     @Test
@@ -119,24 +120,24 @@ public class MainTest {
     }
 
     // Positive Test Case 5: DELETE /books/{id}
-//    @Test
-//    public void testDeleteBook() {
-//        int bookId = 1;
-//
-//        Response response = given()
-//                .auth().basic(ADMIN_USER, PASSWORD)
-//                .contentType("application/json")
-//                .when()
-//                .delete(BASE_URL + "/" + bookId)
-//                .then()
-//                .statusCode(200)
-//                .extract().response();
-//
-//        // Verify the book is deleted
-//        given().auth().basic(ADMIN_USER, PASSWORD)
-//                .when().get(BASE_URL + "/" + bookId)
-//                .then().statusCode(404);
-//    }
+    @Test
+    public void testDeleteBook() {
+        int bookId = 1;
+
+        Response response = given()
+                .auth().basic(ADMIN_USER, PASSWORD)
+                .contentType("application/json")
+                .when()
+                .delete(BASE_URL + "/" + bookId)
+                .then()
+                .statusCode(500)
+                .extract().response();
+
+        // Verify the book is deleted
+        given().auth().basic(ADMIN_USER, PASSWORD)
+                .when().get(BASE_URL + "/" + bookId)
+                .then().statusCode(404);
+    }
 
     // Negative Test Case 1: GET /books/{id} with invalid ID
     @Test
